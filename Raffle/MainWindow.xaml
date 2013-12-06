@@ -1,0 +1,11 @@
+﻿<Window x:Class="Raffle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Raffle!" Height="620" Width="1142">
+    <Grid Background="Black">
+        <Label x:Name="lblNumber" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="CEnter" Height="534" Width="1082" Background="#00000000" Foreground="Red" FontWeight="Bold" FontSize="400" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtMax" HorizontalAlignment="Left" Margin="10,0,0,10" TextWrapping="Wrap" Text="1000" Width="49" Background="Black" Foreground="White" TextChanged="txtMax_TextChanged" Height="23" VerticalAlignment="Bottom"/>
+        <Button Content="Go!" HorizontalAlignment="Left" Margin="64,0,0,10" Width="106" Click="Button_Click" Height="23" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
