@@ -24,6 +24,9 @@ namespace Raffle
         int chosenNumber = 0;
         Random rand = new Random();
 
+        int currentDigit = 0;
+        int spinTime = 0;
+
         DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
         public MainWindow()
@@ -37,22 +40,52 @@ namespace Raffle
             txtMax.Text = maxNumber.ToString();
 
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
-            dispatcherTimer.Start();
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(1);
         }
 
         void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Dispatcher.BeginInvoke(delegate {
-                MessageBox.Show("loL");
-            });
+            spinTime++;
+
+            if (spinTime >= 100)
+            {
+                spinTime = 0;
+                currentDigit++;
+                if (currentDigit == 4)
+                {
+                    lblNumber.Content = chosenNumber.ToString("0000");
+                    dispatcherTimer.Stop();
+                }
+            }
+            else
+            {
+                string num = "";
+
+                if(currentDigit>0)
+                    num += chosenNumber.ToString("0000").Substring(0, currentDigit);
+
+                for (int i = currentDigit; i < 4; i++)
+                {
+                    num += rand.Next(10).ToString();    
+                }
+
+                lblNumber.Content = num;
+            }
+
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             chosenNumber = rand.Next(maxNumber) + 1;
 
-            lblNumber.Content = chosenNumber.ToString("0000");
+            spinTime = 0;
+            currentDigit = 0;
+
+            lblNumber.Content = "0000";
+            dispatcherTimer.Start();
+
+            //lblNumber.Content = chosenNumber.ToString("0000");
         }
 
         private void txtMax_TextChanged(object sender, TextChangedEventArgs e)
